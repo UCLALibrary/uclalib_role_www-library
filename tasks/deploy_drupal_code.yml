@@ -1,0 +1,52 @@
+- name: Check webserver root exists
+  stat:
+    path: "{{ webserver_root }}"
+  register: webserver_root_check
+
+- name: Check sites default files mountpoint exists
+  stat:
+    path: "{{ drupal_sitesfile_mountpoint }}"
+  register: sitesfile_mountpoint_check
+
+- name: Create webserver root
+  file:
+    path: "{{ webserver_root }}"
+    owner: "{{ drupal_user }}"
+    group: "{{ drupal_group }}"
+    mode: 0755
+    state: directory
+
+- name: Create sites default files mountpoint
+  file:
+    path: "{{ drupal_sitesfile_mountpoint }}"
+    owner: "{{ drupal_user }}"
+    group: "{{ drupal_group }}"
+    mode: 0755
+    state: directory
+  when: not sitesfile_mountpoint_check.stat.exists
+
+- name: Clone/update github repository as app user
+  git:
+    repo: "{{ drupal_github_url }}"
+    dest: "{{ drupal_root }}"
+    version: "{{ drupal_github_branch }}"
+    accept_hostkey: yes
+    key_file: /home/druadmin/.ssh/id_rsa
+  become: yes
+  become_user: "{{ drupal_user }}"
+
+- name: Ensure drupal symlinks to sitesfile mountpoint
+  file:
+    src: "{{ drupal_sitesfile_mountpoint }}"
+    dest: "{{ drupal_sitesfiles_symlink }}"
+    owner: "{{ drupal_user }}"
+    group: "{{ drupal_group }}"
+    state: link
+
+- name: Create local settings file
+  template:
+    src: local-settings.j2
+    dest: "{{ localdrupal_settings_dest }}"
+    owner: "{{ drupal_user }}"
+    group: "{{ drupal_group }}"
+    mode: 0644

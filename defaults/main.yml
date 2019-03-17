@@ -1,0 +1,21 @@
+---
+webserver_root: /var/www/html/web
+
+drupal_root: /var/www/html/web/drupal
+drupal_sitesfile_mountpoint: /var/www/html/web/sites_default_files
+drupal_doc_root: /var/www/vhosts/web/drupal/www
+
+drupal_github_url: git@github.com:UCLALibrary/libraryweb-site.git
+drupal_github_branch: master
+
+drupal_sitesfiles_symlink: "{{ drupal_doc_root }}/sites/default/files"
+localdrupal_settings_dest: "{{ drupal_doc_root }}/sites/default/testfile.php"
+
+drupal_user: druadmin
+drupal_group: druadmin
+
+drupal_db: test
+drupal_db_user: testuser
+drupal_db_pw: testpass
+drupal_db_host: localhost
+drupal_db_host_port: 3306
