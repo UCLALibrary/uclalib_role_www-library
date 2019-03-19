@@ -1,5 +1,6 @@
 ---
-- name: Install git
+- name: Install base packages
   yum:
-    name: git
+    name: "{{ base_pkgs }}"
     state: present
+    disable_excludes: all

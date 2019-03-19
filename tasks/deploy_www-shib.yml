@@ -5,6 +5,8 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - restart_httpd
 
 - name: Add associated ssl interm to directory
   copy:
@@ -13,6 +15,8 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - restart_httpd
 
 - name: Add associated ssl key to directory
   copy:
@@ -21,6 +25,8 @@
     owner: root
     group: root
     mode: 0400
+  notify:
+    - restart_httpd
 
 - name: Add HTTPD config for port 443 for Drupal Shibboleth integration
   template:
@@ -29,3 +35,5 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - restart_httpd

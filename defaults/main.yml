@@ -36,4 +36,13 @@ web_url: example.com
 web_env: test-www
 drupal_user: druadmin
 drupal_group: druadmin
+drupal_web_group: druadmin
 drushrc_path: /home/druadmin/.drush
+
+
+
+### Base Package to install
+base_pkgs:
+  - git
+  - nfs-common
+  - syslog-ng
