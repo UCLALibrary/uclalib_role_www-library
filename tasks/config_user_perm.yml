@@ -1,5 +1,5 @@
 - name: Add apache to static file user
   user:
     name: apache
-    groups: "{{ drupal_group }}"
+    groups: "{{ drupal_web_group }}"
     append: yes
