@@ -1,0 +1,15 @@
+- name: Create webserver root
+  file:
+    path: "{{ drushrc_path }}"
+    owner: "{{ drupal_user }}"
+    group: "{{ drupal_group }}"
+    mode: 0775
+    state: directory
+
+- name: Ensure certs directory is created
+  template:
+    src: aliases.drushrc.php.j2
+    dest: "{{ drushrc_path }}/aliases.drushrc.php"
+    owner: "{{ drupal_user }}"
+    group: "{{ drupal_group }}"
+    mode: 0664
