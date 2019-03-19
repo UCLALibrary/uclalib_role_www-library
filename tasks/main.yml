@@ -1,5 +1,7 @@
 ---
 
+- include: install_basepkgs.yml
+- include: config_user_perm.yml
 - include: create_drush_config.yml
 - include: create_httpd_dirs.yml
 - include: deploy_www-80.yml
