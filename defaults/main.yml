@@ -44,5 +44,5 @@ drushrc_path: /home/druadmin/.drush
 ### Base Package to install
 base_pkgs:
   - git
-  - nfs-common
+  - nfs-utils
   - syslog-ng
