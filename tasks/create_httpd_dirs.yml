@@ -1,0 +1,37 @@
+- name: Create webserver root
+  file:
+    path: "{{ webserver_root }}"
+    owner: "{{ drupal_user }}"
+    group: "{{ drupal_group }}"
+    mode: 0755
+    state: directory
+
+- name: Check sites default files mountpoint exists
+  stat:
+    path: "{{ drupal_sitesfile_mountpoint }}"
+  register: sitesfile_mountpoint_check
+
+- name: Create sites default files mountpoint
+  file:
+    path: "{{ drupal_sitesfile_mountpoint }}"
+    owner: "{{ drupal_user }}"
+    group: "{{ drupal_group }}"
+    mode: 0755
+    state: directory
+  when: not sitesfile_mountpoint_check.stat.exists
+
+- name: Ensure vhosts.d directory is created
+  file:
+    path: "{{ vhost_dir }}"
+    owner: root
+    group: root
+    mode: 0644
+    state: directory
+
+- name: Ensure certs directory is created
+  file:
+    path: "{{ certs_dir }}"
+    owner: root
+    group: root
+    mode: 0644
+    state: directory

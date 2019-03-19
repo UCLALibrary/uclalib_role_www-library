@@ -1,0 +1,52 @@
+<VirtualHost *:80>
+  ServerName {{ web_url }}
+  ServerAlias {{ ansible_hostname }}.library.ucla.edu
+  ServerAlias {{ ansible_hostname }}.in.library.ucla.edu
+  DocumentRoot "{{ drupal_doc_root }}
+  SetEnvIf X-Forwarded-For "^.*\..*\..*\..*" forwarded
+  SetEnvIf Request_URI status.php dontlog
+  SetEnvIf Remote_Addr "164\.67\.40\.*" dontlog
+
+  LogFormat "%{X-Forwarded-For}i %{X-Forwarded-Proto}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" proxy
+  CustomLog logs/{{ web_url }}-access.log proxy env=forwarded
+  CustomLog logs/{{ web_url }}-access.log combined env=!dontlog
+  ErrorLog logs/{{ web_url }}-error.log
+#  <Directory {{ drupal_doc_root }}>
+#    AllowOverride All
+#    Options -Indexes +FollowSymLinks
+#    Require all granted
+#  </Directory>
+
+  <Directory "{{ webserver_root }}">
+    Options None
+    Options +FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  <Directory "{{ drupal_doc_root }}">
+    Options None
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+    Include {{ drupal_doc_root }}/.htaccess
+  </Directory>
+
+  <Directory "{{ drupal_doc_root }}/sites/default/files">
+    Options None
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+    Include {{ drupal_doc_root }}/sites/default/files/.htaccess
+  </Directory>
+
+  <Directory "{{ drupal_doc_root }}/sites/default/files/tmp">
+    Options None
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+    Include {{ drupal_doc_root }}/sites/default/files/tmp/.htaccess
+  </Directory>
+
+</VirtualHost>

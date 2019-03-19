@@ -1,0 +1,15 @@
+- name: Copy disableheaders into vhosts config directory
+  copy:
+    src: disableheaders.conf
+    dest: "{{ vhost_dir }}/disableheaders.conf"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Add HTTPD config for port 80 Drupal application
+  template:
+    src: vhost-80.j2
+    dest: "{{ vhost_dir }}/{{ web_url }}.conf"
+    owner: root
+    group: root
+    mode: 0644

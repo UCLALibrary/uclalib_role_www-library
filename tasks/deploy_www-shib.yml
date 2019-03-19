@@ -1,0 +1,31 @@
+- name: Add associated ssl certs to directory
+  copy:
+    src: "{{ ssl_cert_location }}"
+    dest: "{{ certs_dir }}/{{ web_url }}.crt"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Add associated ssl interm to directory
+  copy:
+    src: "{{ ssl_interm_location }}"
+    dest: "{{ certs_dir }}/{{ web_url }}-interm.crt"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Add associated ssl key to directory
+  copy:
+    src: "{{ ssl_key_location }}"
+    dest: "{{ certs_dir }}/{{ web_url }}.key"
+    owner: root
+    group: root
+    mode: 0400
+
+- name: Add HTTPD config for port 443 for Drupal Shibboleth integration
+  template:
+    src: vhost-shib.j2
+    dest: "{{ vhost_dir }}/{{ web_url }}-shib.conf"
+    owner: root
+    group: root
+    mode: 0644
