@@ -11,41 +11,32 @@
   CustomLog logs/{{ web_url }}-access.log proxy env=forwarded
   CustomLog logs/{{ web_url }}-access.log combined env=!dontlog
   ErrorLog logs/{{ web_url }}-error.log
-#  <Directory {{ drupal_doc_root }}>
-#    AllowOverride All
-#    Options -Indexes +FollowSymLinks
-#    Require all granted
-#  </Directory>
 
   <Directory "{{ webserver_root }}">
     Options None
     Options +FollowSymLinks
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
   </Directory>
 
   <Directory "{{ drupal_doc_root }}">
     Options None
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
     Include {{ drupal_doc_root }}/.htaccess
   </Directory>
 
   <Directory "{{ drupal_doc_root }}/sites/default/files">
     Options None
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
     Include {{ drupal_doc_root }}/sites/default/files/.htaccess
   </Directory>
 
   <Directory "{{ drupal_doc_root }}/sites/default/files/tmp">
     Options None
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
     Include {{ drupal_doc_root }}/sites/default/files/tmp/.htaccess
   </Directory>
 

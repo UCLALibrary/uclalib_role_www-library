@@ -33,31 +33,27 @@ Listen {{ shib_app_port }}
     Options None
     Options +FollowSymLinks
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
   </Directory>
 
   <Directory "{{ drupal_doc_root }}">
     Options None
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
     Include {{ drupal_doc_root }}/.htaccess
   </Directory>
 
   <Directory "{{ drupal_doc_root }}/sites/default/files">
     Options None
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
     Include {{ drupal_doc_root }}/sites/default/files/.htaccess
   </Directory>
 
   <Directory "{{ drupal_doc_root }}/sites/default/files/tmp">
     Options None
     AllowOverride None
-    Order allow,deny
-    Allow from all
+    Require all granted
     Include {{ drupal_doc_root }}/sites/default/files/tmp/.htaccess
   </Directory>
 
