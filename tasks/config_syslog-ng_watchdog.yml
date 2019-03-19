@@ -1,4 +1,12 @@
 ---
+- name: Create watchdog directory
+  file:
+    path: /var/log/drupalwatchdog
+    owner: root
+    group: "{{ drupal_group }}"
+    mode: 0640
+    state: directory
+
 - name: Upload standard syslog-ng log file with watchdog configured
   template:
     src: watchdog-syslog-ng.j2
