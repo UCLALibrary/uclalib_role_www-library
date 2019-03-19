@@ -1,21 +1,37 @@
 ---
+### Define HTTPD directories
 webserver_root: /var/www/html/web
+vhost_dir: /etc/httpd/vhosts.d
+certs_dir: /etc/httpd/certs
 
-drupal_root: /var/www/html/web/drupal
-drupal_sitesfile_mountpoint: /var/www/html/web/sites_default_files
-drupal_doc_root: /var/www/vhosts/web/drupal/www
+### HTTPD Shib Settings
+ssl_cert_location: testcrt
+ssl_key_location: testkey
+ssl_interm_location: testinterm
+shib_app_port: 443
 
+### Define Drupal Directories
+drupal_root: "{{ webserver_root }}/drupal"
+drupal_sitesfile_mountpoint: "{{ webserver_root }}/sites_default_files"
+drupal_doc_root: "{{ webserver_root }}/drupal/www"
+
+### Define Drupal Github Repo and Branch
 drupal_github_url: git@github.com:UCLALibrary/libraryweb-site.git
 drupal_github_branch: master
 
+### Define custom localized settings
 drupal_sitesfiles_symlink: "{{ drupal_doc_root }}/sites/default/files"
 localdrupal_settings_dest: "{{ drupal_doc_root }}/sites/default/testfile.php"
 
-drupal_user: druadmin
-drupal_group: druadmin
 
+### Credentials used in localized settings
 drupal_db: test
 drupal_db_user: testuser
 drupal_db_pw: testpass
 drupal_db_host: localhost
 drupal_db_host_port: 3306
+
+### ENV and other variables used
+web_url: example.com
+drupal_user: druadmin
+drupal_group: druadmin
