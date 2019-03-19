@@ -33,5 +33,7 @@ drupal_db_host_port: 3306
 
 ### ENV and other variables used
 web_url: example.com
+web_env: test-www
 drupal_user: druadmin
 drupal_group: druadmin
+drushrc_path: /home/druadmin/.drush
