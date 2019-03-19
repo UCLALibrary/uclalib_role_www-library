@@ -8,3 +8,4 @@
 - include: deploy_www-80.yml
 - include: deploy_www-shib.yml
 - include: deploy_drupal_code.yml
+  tags: [ codedeploy, merge ]
