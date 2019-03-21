@@ -14,9 +14,9 @@
 - name: Create sites default files mountpoint
   file:
     path: "{{ drupal_sitesfile_mountpoint }}"
-    owner: "{{ drupal_user }}"
-    group: "{{ drupal_group }}"
-    mode: 0755
+    owner: apache
+    group: "{{ drupal_web_group }}"
+    mode: 2775
     state: directory
   when: not sitesfile_mountpoint_check.stat.exists
 
