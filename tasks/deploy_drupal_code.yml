@@ -35,12 +35,20 @@
   become: yes
   become_user: "{{ drupal_user }}"
 
-- name: Ensure drupal symlinks to sitesfile mountpoint
+- name: Ensure drupal files symlink to sitesfile mountpoint
   file:
     src: "{{ drupal_sitesfile_mountpoint }}"
     dest: "{{ drupal_sitesfiles_symlink }}"
     owner: apache
     group: "{{ drupal_web_group }}"
+    state: link
+
+- name: Ensure drupal robots symlink to associated robots file
+  file:
+    src: "{{ drupal_doc_root }}/{{ drupal_robots_file }}"
+    dest: "{{ drupal_doc_root }}/{{ drupal_robots_symlink }}"
+    owner: "{{ drupal_user }}"
+    group: "{{ drupal_group }}"
     state: link
 
 - name: Create local settings file
