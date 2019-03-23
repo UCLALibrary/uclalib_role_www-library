@@ -39,6 +39,9 @@ drupal_group: druadmin
 drupal_web_group: druadmin
 drushrc_path: /home/druadmin/.drush
 
+# Robots variables
+drupal_robots_file: "{{ drupal_doc_root }}/test-robots.txt"
+drupal_robots_symlink: "{{ drupal_doc_root }}/robots.txt"
 
 
 ### Base Package to install
