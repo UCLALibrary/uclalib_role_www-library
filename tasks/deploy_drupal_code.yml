@@ -39,8 +39,8 @@
   file:
     src: "{{ drupal_sitesfile_mountpoint }}"
     dest: "{{ drupal_sitesfiles_symlink }}"
-    owner: "{{ drupal_user }}"
-    group: "{{ drupal_group }}"
+    owner: apache
+    group: "{{ drupal_web_group }}"
     state: link
 
 - name: Create local settings file
